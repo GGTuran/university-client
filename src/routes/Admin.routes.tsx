@@ -4,12 +4,23 @@ import CreateAdmin from "../pages/admin/CreateAdmin";
 import CreateFaculty from "../pages/admin/CreateFaculty";
 import CreateStudent from "../pages/admin/CreateStudent";
 import { NavLink } from "react-router-dom";
+import AcademicSemester from "../pages/admin/Academic Management/AcademicSemester";
 
 export const adminPaths = [
   {
     name: "Dashboard",
     path: "dashboard",
     element: <AdminDashboard></AdminDashboard>,
+  },
+  {
+    name: "Academic Management",
+    children: [
+      {
+        name: "Academic Semester",
+        path: "academic-semester",
+        element: <AcademicSemester></AcademicSemester>
+      },
+    ],
   },
   {
     name: "User Management",
@@ -33,7 +44,6 @@ export const adminPaths = [
   },
 ];
 
-
 type TRoute = {
   path: string;
   element: ReactNode;
@@ -44,7 +54,6 @@ type TSidebar = {
   label: ReactNode;
   children?: TSidebar[];
 };
-
 
 export const adminRoutes = adminPaths.reduce((acc: TRoute[], item) => {
   //   acc.push(item);
