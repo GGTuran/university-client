@@ -5,6 +5,11 @@ import CreateFaculty from "../pages/admin/CreateFaculty";
 import CreateStudent from "../pages/admin/CreateStudent";
 import { NavLink } from "react-router-dom";
 import AcademicSemester from "../pages/admin/Academic Management/AcademicSemester";
+import CreateAcademicSemester from "../pages/admin/Academic Management/CreateAcademicSemester";
+import CreateAcademicFaculty from "../pages/admin/Academic Management/CreateAcademicFaculty";
+import AcademicFaculty from "../pages/admin/Academic Management/AcademicFaculty";
+import CreateAcademicDepartment from "../pages/admin/Academic Management/CreateAcademicDepartment";
+import AcademicDepartment from "../pages/admin/Academic Management/AcademicDepartment";
 
 export const adminPaths = [
   {
@@ -16,9 +21,34 @@ export const adminPaths = [
     name: "Academic Management",
     children: [
       {
+        name: "Create A. Semester",
+        path: "create-academic-semester",
+        element: <CreateAcademicSemester></CreateAcademicSemester>
+      },
+      {
         name: "Academic Semester",
         path: "academic-semester",
         element: <AcademicSemester></AcademicSemester>
+      },
+      {
+        name: "Create A. Faculty",
+        path: "create-academic-faculty",
+        element: <CreateAcademicFaculty></CreateAcademicFaculty>
+      },
+      {
+        name: "Academic Faculty",
+        path: "academic-faculty",
+        element: <AcademicFaculty></AcademicFaculty>
+      },
+      {
+        name: "Create A. Department",
+        path: "create-academic-department",
+        element: <CreateAcademicDepartment></CreateAcademicDepartment>
+      },
+      {
+        name: "Academic Department",
+        path: "academic-department",
+        element: <AcademicDepartment></AcademicDepartment>
       },
     ],
   },
