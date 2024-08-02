@@ -9,6 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { academicSemesterSchema } from "../../../schemas/academicManagement.schema";
 import { useAddAcademicSemesterMutation } from "../../../redux/features/admin/academicManagement.api";
 import { toast } from "sonner";
+import { TResponse } from "../../../types";
 
 const currentYear = new Date().getFullYear();
 const yearOptions = [0, 1, 2, 3, 4].map((number) => ({
@@ -17,11 +18,12 @@ const yearOptions = [0, 1, 2, 3, 4].map((number) => ({
 }));
 
 const CreateAcademicSemester = () => {
-
   const [addAcademicSemester] = useAddAcademicSemesterMutation();
 
-  const onSubmit: SubmitHandler<FieldValues> = async(data) => {
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const name = semesterOptions[Number(data.name) - 1]?.label;
+
+    const toastId = toast.loading("Creating...");
 
     const semesterData = {
       name,
@@ -32,18 +34,24 @@ const CreateAcademicSemester = () => {
     };
 
     try {
-      console.log(semesterData);
-      const res = await addAcademicSemester(semesterData);
-      console.log(res);
+      const res = (await addAcademicSemester(semesterData)) as TResponse;
+      if (res.error) {
+        toast.error(res.error.data.message, { id: toastId });
+      } else {
+        toast.success("Semester created", { id: toastId });
+      }
     } catch (error) {
-      toast.error("Something went wrong!!")
+      toast.error("Something went wrong!!", { id: toastId });
     }
   };
 
   return (
     <Flex justify="center" align="center">
       <Col span={6}>
-        <UniForm onSubmit={onSubmit} resolver={zodResolver(academicSemesterSchema)}>
+        <UniForm
+          onSubmit={onSubmit}
+          resolver={zodResolver(academicSemesterSchema)}
+        >
           <UniSelect label="name" name="name" options={semesterOptions} />
           <UniSelect label="Year" name="year" options={yearOptions} />
           <UniSelect
