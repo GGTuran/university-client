@@ -1,4 +1,4 @@
-import { Table, TableColumnsType, TableProps } from "antd";
+import { Button, Table, TableColumnsType, TableProps } from "antd";
 import { useGetAllSemestersQuery } from "../../../redux/features/admin/academicManagement.api";
 import { useState } from "react";
 import { TQueryParam } from "../../../types";
@@ -79,12 +79,23 @@ const AcademicSemester = () => {
       key: "endMonth",
       dataIndex: "endMonth",
     },
+    {
+      title: 'Action',
+      key: 'X',
+      render: () => {
+        return (
+          <div>
+            <Button>Update</Button>
+          </div>
+        );
+      },
+    },
   ];
 
   const onChange: TableProps<TTableData>["onChange"] = (
-    pagination,
+    _pagination,
     filters,
-    sorter,
+    _sorter,
     extra
   ) => {
     if (extra.action === "filter") {
@@ -100,7 +111,7 @@ const AcademicSemester = () => {
 
       setParams(queryParams);
     }
-    console.log("params", pagination, filters, sorter, extra);
+    // console.log("params", pagination, filters, sorter, extra);
   };
 
   return (
