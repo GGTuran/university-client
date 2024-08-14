@@ -1,15 +1,15 @@
-import { ReactNode } from "react";
 import AdminDashboard from "../pages/admin/AdminDashboard";
 import CreateAdmin from "../pages/admin/User Management/CreateAdmin";
 import CreateFaculty from "../pages/admin/User Management/CreateFaculty";
 import CreateStudent from "../pages/admin/User Management/CreateStudent";
-import { NavLink } from "react-router-dom";
 import AcademicSemester from "../pages/admin/Academic Management/AcademicSemester";
 import CreateAcademicSemester from "../pages/admin/Academic Management/CreateAcademicSemester";
 import CreateAcademicFaculty from "../pages/admin/Academic Management/CreateAcademicFaculty";
 import AcademicFaculty from "../pages/admin/Academic Management/AcademicFaculty";
 import CreateAcademicDepartment from "../pages/admin/Academic Management/CreateAcademicDepartment";
 import AcademicDepartment from "../pages/admin/Academic Management/AcademicDepartment";
+import StudentData from "../pages/admin/User Management/StudentData";
+import StudentDetails from "../pages/admin/User Management/StudentDetails";
 
 export const adminPaths = [
   {
@@ -23,32 +23,32 @@ export const adminPaths = [
       {
         name: "Create A. Semester",
         path: "create-academic-semester",
-        element: <CreateAcademicSemester></CreateAcademicSemester>
+        element: <CreateAcademicSemester></CreateAcademicSemester>,
       },
       {
         name: "Academic Semester",
         path: "academic-semester",
-        element: <AcademicSemester></AcademicSemester>
+        element: <AcademicSemester></AcademicSemester>,
       },
       {
         name: "Create A. Faculty",
         path: "create-academic-faculty",
-        element: <CreateAcademicFaculty></CreateAcademicFaculty>
+        element: <CreateAcademicFaculty></CreateAcademicFaculty>,
       },
       {
         name: "Academic Faculty",
         path: "academic-faculty",
-        element: <AcademicFaculty></AcademicFaculty>
+        element: <AcademicFaculty></AcademicFaculty>,
       },
       {
         name: "Create A. Department",
         path: "create-academic-department",
-        element: <CreateAcademicDepartment></CreateAcademicDepartment>
+        element: <CreateAcademicDepartment></CreateAcademicDepartment>,
       },
       {
         name: "Academic Department",
         path: "academic-department",
-        element: <AcademicDepartment></AcademicDepartment>
+        element: <AcademicDepartment></AcademicDepartment>,
       },
     ],
   },
@@ -59,6 +59,15 @@ export const adminPaths = [
         name: "Create Admin",
         path: "create-admin",
         element: <CreateAdmin></CreateAdmin>,
+      },
+      {
+        name: "Students",
+        path: "students-data",
+        element: <StudentData></StudentData>,
+      },
+      {
+        path: "student-data/:studentId",
+        element: <StudentDetails></StudentDetails>,
       },
       {
         name: "Create Faculty",
@@ -74,60 +83,60 @@ export const adminPaths = [
   },
 ];
 
-type TRoute = {
-  path: string;
-  element: ReactNode;
-};
+// type TRoute = {
+//   path: string;
+//   element: ReactNode;
+// };
 
-type TSidebar = {
-  key: string;
-  label: ReactNode;
-  children?: TSidebar[];
-};
+// type TSidebar = {
+//   key: string;
+//   label: ReactNode;
+//   children?: TSidebar[];
+// };
 
-export const adminRoutes = adminPaths.reduce((acc: TRoute[], item) => {
-  //   acc.push(item);
-  if (item.path && item.element) {
-    acc.push({
-      path: item.name,
-      element: item.element,
-    });
-  }
+// export const adminRoutes = adminPaths.reduce((acc: TRoute[], item) => {
+//   //   acc.push(item);
+//   if (item.path && item.element) {
+//     acc.push({
+//       path: item.name,
+//       element: item.element,
+//     });
+//   }
 
-  if (item.children) {
-    item.children.forEach((child) => {
-      acc.push({
-        path: child.path,
-        element: child.element,
-      });
-    });
-  }
+//   if (item.children) {
+//     item.children.forEach((child) => {
+//       acc.push({
+//         path: child.path,
+//         element: child.element,
+//       });
+//     });
+//   }
 
-  return acc;
-}, []);
+//   return acc;
+// }, []);
 
-export const adminSidebarItems = adminPaths.reduce((acc: TSidebar[], item) => {
-  //   acc.push(item);
-  if (item.path && item.element) {
-    acc.push({
-      key: item.name,
-      label: <NavLink to={`/admin/${item.path}`}>{item.name}</NavLink>,
-    });
-  }
+// export const adminSidebarItems = adminPaths.reduce((acc: TSidebar[], item) => {
+//   //   acc.push(item);
+//   if (item.path && item.element) {
+//     acc.push({
+//       key: item.name,
+//       label: <NavLink to={`/admin/${item.path}`}>{item.name}</NavLink>,
+//     });
+//   }
 
-  if (item.children) {
-    acc.push({
-      key: item.name,
-      label: item.name,
-      children: item.children.map((child) => ({
-        key: child.name,
-        label: <NavLink to={`/admin/${child.path}`}>{child.name}</NavLink>,
-      })),
-    });
-  }
+//   if (item.children) {
+//     acc.push({
+//       key: item.name,
+//       label: item.name,
+//       children: item.children.map((child) => ({
+//         key: child.name,
+//         label: <NavLink to={`/admin/${child.path}`}>{child.name}</NavLink>,
+//       })),
+//     });
+//   }
 
-  return acc;
-}, []);
+//   return acc;
+// }, []);
 
 // export const adminPaths = [
 //   {
